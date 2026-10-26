@@ -1,0 +1,22 @@
+
+
+
+
+
+
+Förberedelser:
+1. skapade två stycker feature brancher, feature-merge och feature-rebase.
+2. I main skapade jag conflict.txt, gjorde git add/ commit.
+3. byter sedan till min feature-merge branch för att genomföra en ändring på min conflict fil.
+4. genomför ändrig och kör git add/ commit.
+5. byter tillbaks till main, genom för git merge feature-merge och får conflict.
+
+Konflikthantering:
+1. Hanterar konflikten genom att öppna filen med en texteditor.
+2. därefter git add/ commit. Och sedan en git push.
+output:
+kör git log --online -3, så kan man se ändringarna i filen från det två olika brancherna och seden en resolve merge conflict
+48946c6 – merge-commit där konflikten löstes
+2ee601b – ändringen från feature-merge
+67acc77 – ändringen från main
+ 
