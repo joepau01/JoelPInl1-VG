@@ -1,10 +1,20 @@
+git merge och git rebase där flera utvecklare jobbar på olika feature branches:
+
+git merge skapar en ny merge commit som mergar två branches, vilket bevarar den fullständiga historiken och visar exakt när
+och hur arbetet integrerades. då blir det enkelt att se vilken utvecklare som skrev vad.
+fördel: bevarar historik och hur branches mergats
+nackdel: historiken blir rörig med många merge commits.
+
+git rebase ändrar om commit historiken genom att applicera dina lokala ändringar ovanpå den senaste versionen av tex main.
+vilket ger en mer linjär och lättläst historik.
+fördel: linjär och ren historik
+nackdel: skriver om commits och ändrar commit-IDn
+
+git merge är enklare om flera utvecklare jobbar på samma brancher och man vill bevara historiken som den är. rebase passar
+bättre om man jobbar på sin egen feature-branch.
 
 
-
-
-
-
-Förberedelser:
+Förberedelser merge:
 1. skapade två stycker feature brancher, feature-merge och feature-rebase.
 2. I main skapade jag conflict.txt, gjorde git add/ commit.
 3. byter sedan till min feature-merge branch för att genomföra en ändring på min conflict fil.
@@ -16,7 +26,32 @@ Konflikthantering:
 2. därefter git add/ commit. Och sedan en git push.
 output:
 kör git log --online -3, så kan man se ändringarna i filen från det två olika brancherna och seden en resolve merge conflict
+48946c6 resolve merge conflict
+2ee601b (feature-merge) update on conflict file
+67acc77 update conflict file from main
+
+
 48946c6 – merge-commit där konflikten löstes
 2ee601b – ändringen från feature-merge
 67acc77 – ändringen från main
- 
+
+Förberedelser rebase:
+1. genomförde ändringar i conflict filen, sedan bytte jag till main och ändrade filen på samma rad.
+2. gjorde git switch till feature-rebase
+3. gjorde git rebase main och fick konflikt
+
+Konflikthantering: 
+1. hantera konflikten genom att öppna och ändra med texteditor.
+2. körde en git add och sedan git rebase --continue och fortsätter processen
+3. git push -u origin feature-rebase
+4. git switch main / git push origin main
+
+output:
+kör git log --oneline -3
+c0a68b5 (HEAD -> feature-rebase) change conflict file from feature-rebase
+4b1043f (main) change conflict file from main
+69a5120 (origin/main) add frågor.txt and updated merge conflict resolve
+
+c0a68b5 – feature-commit har placerats ovanpå den senaste committen på main
+4b1043f – senaste committen på main
+69a5120 – senaste committen som finns på GitHub för main
